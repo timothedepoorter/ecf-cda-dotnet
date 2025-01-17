@@ -1,0 +1,50 @@
+﻿@model EcfCdaDotNet.Models.Event
+
+@{
+    ViewData["Title"] = "Détails de l'événement";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <h4>@Model.Title</h4>
+    <p><strong>Lieu:</strong> @Model.Location</p>
+    <p><strong>Date de début:</strong> @Model.StartDate?.ToString("dd/MM/yyyy HH:mm")</p>
+    <p><strong>Date de fin:</strong> @Model.EndDate?.ToString("dd/MM/yyyy HH:mm")</p>
+    <p><strong>Date de création:</strong> @Model.CreationDate?.ToString("dd/MM/yyyy HH:mm")</p>
+    <p><strong>Description:</strong> @Model.Description</p>
+</div>
+
+<h3>Participants</h3>
+@if (Model.Participations.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Âge</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var participation in Model.Participations)
+            {
+                <tr>
+                    <td>@participation.IdParticipantNavigation.Lastname</td>
+                    <td>@participation.IdParticipantNavigation.Firstname</td>
+                    <td>@participation.IdParticipantNavigation.Age</td>
+                    <td>@participation.IdParticipantNavigation.Email</td>
+                    <td>@participation.IdParticipantNavigation.Phone</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Aucun participant inscrit à cet événement.</p>
+}
+
+<a href="@Url.Action("Index", "Events")" class="btn btn-secondary">Retour à la liste</a>

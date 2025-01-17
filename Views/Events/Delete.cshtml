@@ -1,0 +1,22 @@
+﻿@model EcfCdaDotNet.Models.Event
+
+@{
+    ViewData["Title"] = "Confirmation de suppression";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>Êtes-vous sûr de vouloir supprimer cet événement ?</p>
+
+<div>
+    <h4>@Model.Title</h4>
+    <p>Lieu: @Model.Location</p>
+    <p>Date de début: @Model.StartDate?.ToString("dd/MM/yyyy HH:mm")</p>
+    <p>Date de fin: @Model.EndDate?.ToString("dd/MM/yyyy HH:mm")</p>
+    <p>Date de création: @Model.CreationDate?.ToString("dd/MM/yyyy HH:mm")</p>
+</div>
+
+<form method="post">
+    <button type="submit" class="btn btn-danger">Oui, supprimer</button>
+    <a href="@Url.Action("Index", "Events")" class="btn btn-secondary">Annuler</a>
+</form>

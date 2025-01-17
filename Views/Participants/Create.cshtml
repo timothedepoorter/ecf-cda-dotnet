@@ -1,0 +1,59 @@
+﻿@model EcfCdaDotNet.Models.ParticipantCreateViewModel
+
+@{
+    ViewData["Title"] = "Ajouter un participant";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Lastname" class="control-label">Nom</label>
+        <input asp-for="Lastname" class="form-control" />
+        <span asp-validation-for="Lastname" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Firstname" class="control-label">Prénom</label>
+        <input asp-for="Firstname" class="form-control" />
+        <span asp-validation-for="Firstname" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Age" class="control-label">Âge</label>
+        <input asp-for="Age" class="form-control" type="number" />
+        <span asp-validation-for="Age" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email" class="control-label">Email</label>
+        <input asp-for="Email" class="form-control" type="email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Phone" class="control-label">Téléphone</label>
+        <input asp-for="Phone" class="form-control" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Gender" class="control-label">Genre</label>
+        <select asp-for="Gender" class="form-control">
+            <option value="Male">Homme</option>
+            <option value="Female">Femme</option>
+            <option value="Other">Autre</option>
+        </select>
+        <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EventId" class="control-label">Evénements</label>
+        <select asp-for="EventId" class="form-control">
+            @foreach (var evt in ViewBag.Events as List<EcfCdaDotNet.Models.Event>)
+            {
+                <option value="@evt.Id">@evt.Title</option>
+            }
+        </select>
+        <span asp-validation-for="EventId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter le participant</button>
+</form>
+
+<a href="@Url.Action("Index", "Events")">Retour à la page d'accueil</a>
+
